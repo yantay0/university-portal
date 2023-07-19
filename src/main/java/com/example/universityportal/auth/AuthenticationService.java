@@ -32,7 +32,10 @@ public class AuthenticationService {
                 .build();
 
         userRepository.save(user);
-        return generateAuthenticationResponseWithJwt(user);
+        var jwtToken = jwtService.generateToken(user);
+        return AuthenticationResponse.builder()
+                .token(jwtToken)
+                .build();
     }
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
         authenticationManager.authenticate(
@@ -43,13 +46,10 @@ public class AuthenticationService {
         );
         var user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(); // need to catch exception
-        return generateAuthenticationResponseWithJwt(user);
-    }
-
-    public AuthenticationResponse generateAuthenticationResponseWithJwt(UserDetails userDetails) {
-        var jwtToken = jwtService.generateToken(userDetails);
+        var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .build();
     }
+
 }

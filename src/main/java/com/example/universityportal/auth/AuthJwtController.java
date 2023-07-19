@@ -15,7 +15,6 @@ public class AuthJwtController {
     public ResponseEntity<AuthenticationResponse> register(
             @RequestBody RegisterRequest request
     ) {
-        System.out.println(authService.register(request));
         return ResponseEntity.ok(authService.register(request));
     }
 
