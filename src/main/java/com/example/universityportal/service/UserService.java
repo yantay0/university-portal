@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface UserService {
 
-    User createUser(User user);
+//    User createUser(User user);
 
 //    User getFirstUser();
 

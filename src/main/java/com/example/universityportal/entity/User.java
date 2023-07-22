@@ -43,16 +43,13 @@ public class User implements UserDetails {
     @Transient
     private String confirmedPassword;
 
-//    @Column(name = "enabled")
-//    private boolean enabled = true;
-
     @Enumerated(value = EnumType.STRING)
     @Column(name = "role")
     private Role role;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role.name()));
+        return role.getAuthorities();
     }
 
     @Override

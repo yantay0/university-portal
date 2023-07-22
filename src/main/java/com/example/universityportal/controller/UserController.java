@@ -18,11 +18,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/users")
-    public List<User> getAllUsers() {
-        return userService.getAllUsers();
-    }
-
     @GetMapping
     public ResponseEntity<String> sayHello() {
         return ResponseEntity.ok("Hello from secured Demo");

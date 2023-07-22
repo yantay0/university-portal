@@ -16,15 +16,15 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
 
-    @Override
-    public User createUser(User user) {
-        Optional<User> localUser = this.userRepository.findByEmail(user.getEmail());
-        if (localUser.isPresent()) {
-            throw new RuntimeException("User already exist");
-        }
-        userRepository.save(user);
-        return user;
-    }
+//    @Override
+//    public User createUser(User user) {
+//        Optional<User> localUser = this.userRepository.findByEmail(user.getEmail());
+//        if (localUser.isPresent()) {
+//            throw new RuntimeException("User already exist");
+//        }
+//        userRepository.save(user);
+//        return user;
+//    }
 
     public void saveUser(User user) {
         userRepository.save(user);

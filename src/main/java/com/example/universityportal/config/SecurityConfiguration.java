@@ -11,6 +11,10 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import static com.example.universityportal.entity.Permission.ADMIN_READ;
+import static com.example.universityportal.entity.Role.*;
+import static org.springframework.http.HttpMethod.GET;
+
 
 @Configuration
 @EnableWebSecurity
@@ -26,6 +30,8 @@ public class SecurityConfiguration {
               .csrf(AbstractHttpConfigurer::disable)
               .authorizeHttpRequests(auth -> auth
                       .requestMatchers("/api/v1/auth/**").permitAll()
+                      .requestMatchers("/api/v1/admin/**").hasAnyRole(ADMIN.name())
+                      .requestMatchers("/api/v1/student/**").hasAnyRole(ADMIN.name(), STUDENT.name())
                       .anyRequest().authenticated()
               )
               .sessionManagement(session -> session
