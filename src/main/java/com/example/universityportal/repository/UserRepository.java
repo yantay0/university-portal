@@ -9,14 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
-@Repository
-@Transactional
+
 public interface UserRepository extends JpaRepository<User, Long> {
 
     Optional<User> findByEmail(String email);
-
-    @Query("UPDATE User u SET u.firstname = :firstName WHERE u.email = :email")
-    @Modifying
-    void updateUserFirstName(String email, String firstName);
 
 }
