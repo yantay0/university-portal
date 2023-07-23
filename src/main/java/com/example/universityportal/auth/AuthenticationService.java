@@ -1,7 +1,10 @@
 package com.example.universityportal.auth;
 
 import com.example.universityportal.entity.Role;
+import com.example.universityportal.entity.Token;
+import com.example.universityportal.entity.TokenType;
 import com.example.universityportal.entity.User;
+import com.example.universityportal.repository.TokenRepository;
 import com.example.universityportal.repository.UserRepository;
 import com.example.universityportal.security.JwtAuthenticationException;
 import com.example.universityportal.security.JwtService;
@@ -22,6 +25,7 @@ import org.springframework.stereotype.Service;
 
 public class AuthenticationService {
     private final UserRepository userRepository;
+    private final TokenRepository tokenRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
@@ -37,9 +41,21 @@ public class AuthenticationService {
 
         userRepository.save(user);
         var jwtToken = jwtService.generateToken(user);
+        saveUserToken(user, jwtToken);
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .build();
+    }
+
+    private void saveUserToken(User user, String jwtToken) {
+        var token = Token.builder()
+                .user(user)
+                .token(jwtToken)
+                .tokenType(TokenType.BEARER)
+                .expired(false)
+                .revoked(false)
+                .build();
+        tokenRepository.save(token);
     }
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
         try {
@@ -52,6 +68,8 @@ public class AuthenticationService {
             var user = userRepository.findByEmail(request.getEmail())
                     .orElseThrow(() -> new UsernameNotFoundException("User with email " + request.getEmail() + " not found")); // need to catch exception
             var jwtToken = jwtService.generateToken(user);
+            revokeAllUserTokens(user);
+            saveUserToken(user, jwtToken);
             return AuthenticationResponse.builder()
                     .token(jwtToken)
                     .build();
@@ -59,6 +77,18 @@ public class AuthenticationService {
             throw new JwtAuthenticationException("Authentication failed: " + ex.getMessage(), HttpStatus.UNAUTHORIZED);
         }
 
+    }
+
+    private void revokeAllUserTokens(User user) {
+        var validUserTokens = tokenRepository.findAllValidTokenByUser(user.getId());
+        if (validUserTokens.isEmpty()) {
+            return;
+        }
+        validUserTokens.forEach(token -> {
+            token.setExpired(true);
+            token.setRevoked(true);
+        });
+        tokenRepository.saveAll(validUserTokens);
     }
 
 }
