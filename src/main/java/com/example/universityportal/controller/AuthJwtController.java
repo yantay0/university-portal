@@ -1,5 +1,9 @@
-package com.example.universityportal.auth;
+package com.example.universityportal.controller;
 
+import com.example.universityportal.auth.AuthenticationRequest;
+import com.example.universityportal.auth.AuthenticationResponse;
+import com.example.universityportal.auth.AuthenticationService;
+import com.example.universityportal.auth.RegisterRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,4 +28,5 @@ public class AuthJwtController {
     ) {
         return ResponseEntity.ok(authService.authenticate(request));
     }
+
 }

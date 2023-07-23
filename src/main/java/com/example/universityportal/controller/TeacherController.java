@@ -1,2 +1,5 @@
-package com.example.universityportal.controller;public class TeacherController {
+package com.example.universityportal.controller;
+
+public class TeacherController {
+
 }

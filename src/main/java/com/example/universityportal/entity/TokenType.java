@@ -1,4 +1,4 @@
-package com.example.universityportal.token;
+package com.example.universityportal.entity;
 
 public enum TokenType {
     BEARER,

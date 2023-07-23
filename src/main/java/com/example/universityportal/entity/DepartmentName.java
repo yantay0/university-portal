@@ -1,10 +1,10 @@
 package com.example.universityportal.entity;
 
-public enum DepartmentE {
+public enum DepartmentName {
     COMPUTER_SCIENCE,
     MATHEMATICS,
     PHYSICS,
     CHEMISTRY,
     BIOLOGY,
-    // Add other department values as needed
+
 }

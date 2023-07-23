@@ -13,7 +13,8 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "users")
+@Table(name = "_user")
+//@Inheritance(strategy = InheritanceType.JOINED)
 @Getter
 @Setter
 @ToString
@@ -46,6 +47,9 @@ public class User implements UserDetails {
     @Enumerated(value = EnumType.STRING)
     @Column(name = "role")
     private Role role;
+
+    @OneToMany(mappedBy = "user")
+    private List<Token> tokens;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
