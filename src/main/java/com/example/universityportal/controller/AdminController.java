@@ -1,5 +1,8 @@
 package com.example.universityportal.controller;
 
+import com.example.universityportal.auth.AuthenticationResponse;
+import com.example.universityportal.auth.AuthenticationService;
+import com.example.universityportal.auth.RegisterRequest;
 import com.example.universityportal.entity.User;
 import com.example.universityportal.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +19,7 @@ import java.util.List;
 public class AdminController {
 
     private final UserService userService;
+    private final AuthenticationService authService;
 
     @GetMapping("/users")
     @PreAuthorize("hasAuthority('admin:read')")
@@ -30,5 +34,11 @@ public class AdminController {
         return ResponseEntity.ok("Hello from Admin controller test");
     }
 
-
+    @PostMapping("/users")
+    @PreAuthorize("hasAnyAuthority('admin:create')")
+    public ResponseEntity<AuthenticationResponse> registerNewUser(
+            @RequestBody RegisterRequest request
+    ) {
+        return ResponseEntity.ok(authService.register(request));
+    }
 }

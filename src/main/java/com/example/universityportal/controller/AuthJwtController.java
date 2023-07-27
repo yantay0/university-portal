@@ -15,12 +15,6 @@ public class AuthJwtController {
 
     private final AuthenticationService authService;
 
-    @PostMapping("/register")
-    public ResponseEntity<AuthenticationResponse> register(
-            @RequestBody RegisterRequest request
-    ) {
-        return ResponseEntity.ok(authService.register(request));
-    }
 
     @PostMapping("/authenticate")
     public ResponseEntity<AuthenticationResponse> authenticate(
@@ -28,5 +22,6 @@ public class AuthJwtController {
     ) {
         return ResponseEntity.ok(authService.authenticate(request));
     }
+
 
 }
