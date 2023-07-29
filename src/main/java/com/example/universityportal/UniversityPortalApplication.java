@@ -2,6 +2,7 @@ package com.example.universityportal;
 
 import com.example.universityportal.auth.AuthenticationService;
 import com.example.universityportal.auth.RegisterRequest;
+import com.example.universityportal.repository.CourseRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
@@ -50,4 +51,5 @@ public class UniversityPortalApplication {
             System.out.println("Manager token: " + authService.register(manager).getToken());
         };
     }
+
 }

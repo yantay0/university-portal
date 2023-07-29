@@ -13,9 +13,10 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
 
-import static com.example.universityportal.entity.Permission.ADMIN_READ;
+import static com.example.universityportal.entity.Permission.*;
 import static com.example.universityportal.entity.Role.*;
-import static org.springframework.http.HttpMethod.GET;
+import static org.springframework.http.HttpMethod.*;
+import static org.springframework.http.HttpMethod.DELETE;
 
 
 @Configuration
@@ -35,7 +36,16 @@ public class SecurityConfiguration {
                       .requestMatchers("/api/v1/auth/**").permitAll()
                       .requestMatchers("/api/v1/admin/**").hasAnyRole(ADMIN.name())
                       .requestMatchers("/api/v1/student/**").hasAnyRole(ADMIN.name(), STUDENT.name())
-                      .anyRequest().authenticated()
+                      .requestMatchers("api/v1/management/**").hasAnyRole(ADMIN.name(), MANAGER.name())
+
+                      .requestMatchers(GET, "/api/v1/management/**").hasAnyAuthority(ADMIN_READ.name(), MANAGER_READ.name())
+                      .requestMatchers(POST, "/api/v1/management/**").hasAnyAuthority(ADMIN_CREATE.name(), MANAGER_CREATE.name())
+                      .requestMatchers(PUT, "/api/v1/management/**").hasAnyAuthority(ADMIN_UPDATE.name(), MANAGER_UPDATE.name())
+                      .requestMatchers(DELETE, "/api/v1/management/**").hasAnyAuthority(ADMIN_DELETE.name(), MANAGER_DELETE.name())
+
+
+
+//                      .anyRequest().authenticated()
               )
               .sessionManagement(session -> session
                       .sessionCreationPolicy(
