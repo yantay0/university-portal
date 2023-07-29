@@ -11,3 +11,6 @@ INSERT INTO course (code, name, department_id) VALUES
                                                    ('EEE201', 'Electronics I', 2),
                                                    ('MEC301', 'Thermodynamics', 3),
                                                    ('CHE401', 'Organic Chemistry', 6);
+
+INSERT INTO teacher(department_id, id, user_id) VALUES
+                                                    (1, 1, 1);

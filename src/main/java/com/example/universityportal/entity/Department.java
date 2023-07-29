@@ -20,10 +20,14 @@ public class Department {
     private Long id;
 
     @Column(name = "name")
-    @Enumerated(EnumType.STRING)
-    private DepartmentName departmentName;
+    private String name;
 
-    @OneToMany(mappedBy = "department", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "department",
+            cascade = CascadeType.ALL)
     @ToString.Exclude
     private List<Student> students;
+
+    @OneToMany(mappedBy = "department",
+    cascade = CascadeType.ALL)
+    private List<Course> courses;
 }

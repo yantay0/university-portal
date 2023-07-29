@@ -1,5 +1,6 @@
 package com.example.universityportal.service.impl;
 
+import com.example.universityportal.entity.Course;
 import com.example.universityportal.entity.Teacher;
 import com.example.universityportal.repository.TeacherRepository;
 import com.example.universityportal.repository.UserRepository;
@@ -9,6 +10,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
+
 @Service
 @RequiredArgsConstructor
 public class TeacherServiceImpl implements TeacherService {
@@ -40,4 +43,6 @@ public class TeacherServiceImpl implements TeacherService {
     public void deleteTeacher(Long id) {
         teacherRepository.deleteById(id);
     }
+
+
 }

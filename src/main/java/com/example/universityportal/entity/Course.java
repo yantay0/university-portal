@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -14,10 +15,14 @@ import java.util.Set;
 @Builder
 @RequiredArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor(force = true)
 public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "code")
+    private String code;
 
     @Column(name = "name")
     private String name;
@@ -26,6 +31,11 @@ public class Course {
     @JoinColumn(name = "prerequisite_id")
     private Course prerequisite;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "department_id")
+    private final Department department;
+
     @ManyToMany(mappedBy = "courses")
-    private Set<Teacher> teachers = new HashSet<>();
+    private List<Teacher> teachers;
+
 }
