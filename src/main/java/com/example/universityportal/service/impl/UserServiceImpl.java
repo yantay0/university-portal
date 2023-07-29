@@ -26,10 +26,6 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(user);
     }
 
-    @Override
-    public User updateUser(User user) {
-        return userRepository.save(user);
-    }
 
     @Override
     public User getUserById(Long id) {
@@ -42,5 +38,13 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteById(id);
     }
 
+    public User updateUser(Long id, User updatedUser) {
+        var user = userRepository.findById(id)
+                .orElseThrow(()-> new UsernameNotFoundException("User with id " + id + " does not exist"));
+        user.setEmail(updatedUser.getEmail());
+        user.setFirstname(updatedUser.getFirstname());
+        user.setLastname(updatedUser.getLastname());
+        return userRepository.save(user);
+    }
 
 }
