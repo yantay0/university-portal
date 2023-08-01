@@ -1,5 +1,8 @@
 package com.example.universityportal.entity;
 
+import lombok.Getter;
+
+@Getter
 public enum Permission {
 
     ADMIN_READ("admin:read"),
@@ -32,7 +35,4 @@ public enum Permission {
         this.permission = permission;
     }
 
-    public String getPermission() {
-        return permission;
-    }
 }

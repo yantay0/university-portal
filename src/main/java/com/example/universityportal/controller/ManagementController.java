@@ -1,5 +1,6 @@
 package com.example.universityportal.controller;
 
+import com.example.universityportal.entity.Teacher;
 import com.example.universityportal.entity.User;
 import com.example.universityportal.service.UserService;
 import com.example.universityportal.service.impl.ManagerService;
@@ -35,5 +36,10 @@ public class ManagementController {
     ) {
         managerService.assignCoursesForTeacher(teacherId, courseCode);
         return ResponseEntity.ok("\"Course assigned successfully to teacher with ID: \"" + teacherId);
+    }
+
+    @GetMapping("/users/{id}")
+    public ResponseEntity<User> getUserById(@PathVariable Long id) {
+        return ResponseEntity.ok(userService.getUserById(id));
     }
 }

@@ -5,6 +5,7 @@ import com.example.universityportal.entity.Teacher;
 import com.example.universityportal.repository.TeacherRepository;
 import com.example.universityportal.repository.UserRepository;
 import com.example.universityportal.service.TeacherService;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -36,7 +37,7 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public Teacher getTeacherById(Long id) {
         return teacherRepository.findById(id)
-                .orElseThrow(() -> new UsernameNotFoundException("Teacher with id " + id + " not found"));
+                .orElseThrow(() -> new EntityNotFoundException("Teacher with id " + id + " not found"));
     }
 
     @Override
