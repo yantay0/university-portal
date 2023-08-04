@@ -1,5 +1,6 @@
 package com.example.universityportal.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -11,7 +12,7 @@ import java.util.Set;
 @Table(name = "course")
 @Getter
 @Setter
-@ToString
+//@ToString
 @Builder
 @RequiredArgsConstructor
 @AllArgsConstructor
@@ -29,13 +30,17 @@ public class Course {
 
     @OneToOne
     @JoinColumn(name = "prerequisite_id")
+    @ToString.Exclude
     private Course prerequisite;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "department_id")
+    @ToString.Exclude
+    @JsonIgnore
     private final Department department;
 
     @ManyToMany(mappedBy = "courses")
+    @ToString.Exclude
     private List<Teacher> teachers;
 
 }

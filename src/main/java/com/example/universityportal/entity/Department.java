@@ -1,5 +1,6 @@
 package com.example.universityportal.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -9,7 +10,7 @@ import java.util.List;
 @Table(name = "department")
 @Getter
 @Setter
-@ToString
+//@ToString
 @Builder
 @RequiredArgsConstructor
 @AllArgsConstructor
@@ -25,9 +26,12 @@ public class Department {
     @OneToMany(mappedBy = "department",
             cascade = CascadeType.ALL)
     @ToString.Exclude
+    @JsonIgnore
     private List<Student> students;
 
     @OneToMany(mappedBy = "department",
     cascade = CascadeType.ALL)
+    @ToString.Exclude
+    @JsonIgnore
     private List<Course> courses;
 }

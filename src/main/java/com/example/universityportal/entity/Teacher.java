@@ -10,7 +10,7 @@ import java.util.Set;
 @Table(name = "teacher")
 @Getter
 @Setter
-@ToString
+//@ToString
 @Builder
 @RequiredArgsConstructor
 @AllArgsConstructor
@@ -22,6 +22,7 @@ public class Teacher {
     private Long id;
 
     @ManyToOne
+    @ToString.Exclude
     @JoinColumn(name = "department_id")
     private Department department;
 

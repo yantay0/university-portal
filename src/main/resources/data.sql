@@ -14,3 +14,4 @@ INSERT INTO course (code, name, department_id) VALUES
 
 INSERT INTO teacher(department_id, id, user_id) VALUES
                                                     (1, 1, 1);
+

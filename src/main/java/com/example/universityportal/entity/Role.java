@@ -36,22 +36,6 @@ public enum Role {
                     MANAGER_CREATE
             )
     ),
-//    STUDENT(
-//            Set.of(
-//                    STUDENT_READ,
-//                    STUDENT_UPDATE,
-//                    STUDENT_CREATE,
-//                    STUDENT_DELETE
-//            )
-//    ),
-//    TEACHER(
-//            Set.of(
-//                    TEACHER_READ,
-//                    TEACHER_UPDATE,
-//                    TEACHER_CREATE,
-//                    TEACHER_DELETE
-//            )
-//    )
 
     ;
 

@@ -10,7 +10,7 @@ import java.util.UUID;
 @Table(name = "student")
 @Getter
 @Setter
-@ToString
+//@ToString
 @Builder
 @RequiredArgsConstructor
 @AllArgsConstructor
@@ -28,6 +28,7 @@ public class Student {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "department_id")
+    @ToString.Exclude
     private Department department;
 
     @OneToOne
