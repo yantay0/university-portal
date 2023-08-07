@@ -28,7 +28,6 @@ public class Student {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "department_id")
-    @ToString.Exclude
     private Department department;
 
     @OneToOne

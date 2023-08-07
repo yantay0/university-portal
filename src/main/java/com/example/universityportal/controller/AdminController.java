@@ -3,8 +3,10 @@ package com.example.universityportal.controller;
 import com.example.universityportal.auth.AuthenticationResponse;
 import com.example.universityportal.auth.AuthenticationService;
 import com.example.universityportal.auth.RegisterRequest;
+import com.example.universityportal.entity.Course;
 import com.example.universityportal.entity.User;
 import com.example.universityportal.service.UserService;
+import com.example.universityportal.service.CourseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -20,6 +22,7 @@ public class AdminController {
 
     private final UserService userService;
     private final AuthenticationService authService;
+    private final CourseService courseService;
 
     @GetMapping("/users")
     @PreAuthorize("hasAuthority('admin:read')")
@@ -40,5 +43,12 @@ public class AdminController {
             @RequestBody RegisterRequest request
     ) {
         return ResponseEntity.ok(authService.register(request));
+    }
+
+    @GetMapping("/courses")
+    @PreAuthorize("hasAnyAuthority('admin:read')")
+    public ResponseEntity<List<Course>> getAllCourses() {
+        List<Course> courses = courseService.getAllCourses();
+        return ResponseEntity.ok(courses);
     }
 }

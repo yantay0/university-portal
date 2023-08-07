@@ -1,4 +1,4 @@
-package com.example.universityportal.service.impl;
+package com.example.universityportal.service;
 
 import com.example.universityportal.entity.Course;
 import com.example.universityportal.entity.Department;
@@ -31,5 +31,9 @@ public class CourseService {
 
     public List<Course> getCoursesByDepartment(Department department) {
         return courseRepository.findAllByDepartment(department);
+    }
+
+    public List<Course> getAllCourses() {
+        return courseRepository.findAll();
     }
 }

@@ -1,14 +1,10 @@
 package com.example.universityportal.controller;
 
 import com.example.universityportal.entity.Course;
-import com.example.universityportal.exception.EntityNotFoundException;
-import com.example.universityportal.repository.DepartmentRepository;
-import com.example.universityportal.repository.TeacherRepository;
 import com.example.universityportal.service.TeacherService;
-import com.example.universityportal.service.impl.CourseService;
+import com.example.universityportal.service.CourseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

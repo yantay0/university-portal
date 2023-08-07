@@ -1,15 +1,12 @@
 package com.example.universityportal.controller;
 
-import com.example.universityportal.entity.Teacher;
 import com.example.universityportal.entity.User;
 import com.example.universityportal.service.UserService;
-import com.example.universityportal.service.impl.ManagerService;
+import com.example.universityportal.service.ManagerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/management")

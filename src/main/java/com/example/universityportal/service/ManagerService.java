@@ -1,13 +1,8 @@
-package com.example.universityportal.service.impl;
+package com.example.universityportal.service;
 
-import com.example.universityportal.entity.User;
 import com.example.universityportal.exception.DepartmentMismatchException;
-import com.example.universityportal.repository.CourseRepository;
 import com.example.universityportal.repository.TeacherRepository;
-import com.example.universityportal.repository.UserRepository;
-import com.example.universityportal.service.TeacherService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
