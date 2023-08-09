@@ -6,6 +6,7 @@ import com.example.universityportal.auth.AuthenticationService;
 import com.example.universityportal.auth.RegisterRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -23,5 +24,12 @@ public class AuthJwtController {
         return ResponseEntity.ok(authService.authenticate(request));
     }
 
+    @PostMapping("/register")
+    @PreAuthorize("hasAnyAuthority('admin:create', 'manager:create')")
+    public ResponseEntity<AuthenticationResponse> register(
+            @RequestBody RegisterRequest request
+    ) {
+        return ResponseEntity.ok(authService.register(request));
+    }
 
 }

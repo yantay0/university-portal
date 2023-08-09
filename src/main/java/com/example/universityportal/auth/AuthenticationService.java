@@ -1,13 +1,13 @@
 package com.example.universityportal.auth;
 
-import com.example.universityportal.entity.Role;
-import com.example.universityportal.entity.Token;
-import com.example.universityportal.entity.TokenType;
-import com.example.universityportal.entity.User;
+import com.example.universityportal.entity.*;
+import com.example.universityportal.repository.StudentRepository;
 import com.example.universityportal.repository.TokenRepository;
 import com.example.universityportal.repository.UserRepository;
 import com.example.universityportal.security.JwtAuthenticationException;
 import com.example.universityportal.security.JwtService;
+import com.example.universityportal.service.StudentService;
+import com.example.universityportal.service.TeacherService;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +29,8 @@ public class AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
+    private final StudentService studentService;
+    private final TeacherService teacherService;
 
     public AuthenticationResponse register(RegisterRequest request) {
         var user = User.builder()
@@ -38,12 +40,23 @@ public class AuthenticationService {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(request.getRole())
                 .build();
-
         userRepository.save(user);
         var jwtToken = jwtService.generateToken(user);
         saveUserToken(user, jwtToken);
+        if (user.getRole() == Role.STUDENT) {
+            var student = Student.builder()
+                    .user(user).build();
+            studentService.addStudent(student);
+        }
+        else if (user.getRole() == Role.TEACHER) {
+            var teacher = Teacher.builder()
+                    .user(user).build();
+            teacherService.addTeacher(teacher);
+
+        }
         return AuthenticationResponse.builder()
                 .token(jwtToken)
+                .email(user.getEmail())
                 .build();
     }
 
