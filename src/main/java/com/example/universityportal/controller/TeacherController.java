@@ -25,18 +25,21 @@ public class TeacherController {
     private final AssignCourseService assignCourseService;
     private final AuthenticationService authService;
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'MANAGER')")
     @GetMapping
     public ResponseEntity<List<Teacher>> getTeachers() {
         List<Teacher> teachers= teacherService.getAllTeachers();
         return ResponseEntity.ok(teachers);
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'MANAGER', 'TEACHER')")
     @GetMapping("/{teacherId}")
     public ResponseEntity<?> getUser(@PathVariable Long teacherId) {
         Teacher teacher = teacherService.getTeacherById(teacherId);
         return ResponseEntity.ok(teacher);
     }
 
+@PreAuthorize("hasAnyRole('ADMIN', 'MANAGER')")
     @PostMapping("/teachers/{teacherId}/assign-course")
     public ResponseEntity<String> assignCourseToTeacher(
             @PathVariable Long teacherId, @RequestParam String courseCode

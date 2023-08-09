@@ -25,7 +25,7 @@ public class AuthJwtController {
     }
 
     @PostMapping("/register")
-    @PreAuthorize("hasAnyAuthority('admin:create', 'manager:create')")
+    @PreAuthorize("hasAnyAuthority('admin:create', 'management:create')")
     public ResponseEntity<AuthenticationResponse> register(
             @RequestBody RegisterRequest request
     ) {
