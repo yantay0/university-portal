@@ -1,6 +1,7 @@
 package com.example.universityportal.service.impl;
 
 import com.example.universityportal.entity.Student;
+import com.example.universityportal.entity.Student;
 import com.example.universityportal.repository.StudentRepository;
 import com.example.universityportal.service.StudentService;
 import lombok.RequiredArgsConstructor;
@@ -21,8 +22,12 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public void updateStudent(Student student) {
-        studentRepository.save(student);
+    public Student updateStudent(Long id, Student updatedStudent) {
+        var student = studentRepository.findById(id)
+                .orElseThrow(()-> new UsernameNotFoundException("Student with id " + id + " does not exist"));
+        student.setDepartment(updatedStudent.getDepartment());
+        student.setYearOfStudy(updatedStudent.getYearOfStudy());
+        return studentRepository.save(student);
     }
 
     @Override
@@ -36,7 +41,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Student findStudentById(Long id) {
+    public Student getStudentById(Long id) {
         return studentRepository.findById(id)
                 .orElseThrow(() -> new UsernameNotFoundException("Student with id " + id + "not found"));
     }

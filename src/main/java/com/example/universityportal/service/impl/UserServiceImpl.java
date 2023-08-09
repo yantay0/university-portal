@@ -4,15 +4,14 @@ import com.example.universityportal.repository.UserRepository;
 import com.example.universityportal.entity.User;
 import com.example.universityportal.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 

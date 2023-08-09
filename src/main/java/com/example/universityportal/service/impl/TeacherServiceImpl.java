@@ -2,6 +2,7 @@ package com.example.universityportal.service.impl;
 
 import com.example.universityportal.entity.Course;
 import com.example.universityportal.entity.Teacher;
+import com.example.universityportal.exception.DepartmentMismatchException;
 import com.example.universityportal.repository.TeacherRepository;
 import com.example.universityportal.repository.UserRepository;
 import com.example.universityportal.service.TeacherService;
@@ -44,6 +45,5 @@ public class TeacherServiceImpl implements TeacherService {
     public void deleteTeacher(Long id) {
         teacherRepository.deleteById(id);
     }
-
 
 }
