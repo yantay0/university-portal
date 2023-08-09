@@ -2,6 +2,10 @@ package com.example.universityportal.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 import org.springframework.security.core.GrantedAuthority;
@@ -30,13 +34,17 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Firstname cannot be blank")
     @Column(name = "first_name")
     private String firstname;
 
+    @NotBlank(message = "Lastname cannot be blank")
     @Column(name = "last_name")
     private String lastname;
 
-    @Column(name = "email")
+    @NotBlank(message = "Email cannot be blank")
+    @Email(message = "Email should be valid")
+    @Column(name = "email", unique = true)
     private String email;
 
     @Column(name = "password")

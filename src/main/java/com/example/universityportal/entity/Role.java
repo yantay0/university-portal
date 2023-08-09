@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 
 import static com.example.universityportal.entity.Permission.*;
 
+@Getter
 @RequiredArgsConstructor
 public enum Role {
 
@@ -37,10 +38,27 @@ public enum Role {
             )
     ),
 
+    STUDENT(
+            Set.of(
+                    STUDENT_READ,
+                    STUDENT_UPDATE,
+                    STUDENT_CREATE,
+                    STUDENT_DELETE
+                    )
+    ),
+
+    TEACHER(
+            Set.of(
+                    TEACHER_READ,
+                    TEACHER_UPDATE,
+                    TEACHER_CREATE,
+                    TEACHER_DELETE
+                    )
+    )
+
     ;
 
 
-    @Getter
     private final Set<Permission> permissions;
 
     public List<SimpleGrantedAuthority> getAuthorities() {

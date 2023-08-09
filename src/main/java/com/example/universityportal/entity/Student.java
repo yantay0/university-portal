@@ -10,7 +10,7 @@ import java.util.UUID;
 @Table(name = "student")
 @Getter
 @Setter
-//@ToString
+@ToString
 @Builder
 @RequiredArgsConstructor
 @AllArgsConstructor
